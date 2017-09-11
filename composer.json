@@ -1,0 +1,39 @@
+{
+  "name": "richardhj/contao-multicolumnwizard-frontend",
+  "type": "contao-module",
+  "description": "",
+  "keywords": [
+    "contao"
+  ],
+  "license": "LGPL-3.0+",
+  "authors": [
+    {
+      "name": "Richard Henkenjohann",
+      "email": "richardhenkenjohann@googlemail.com",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/richardhj/contao-multicolumnwizard-frontend/issues",
+    "source": "https://github.com/richardhj/contao-multicolumnwizard-frontend"
+  },
+  "require": {
+    "php": "^5.4 || ^7.0",
+    "contao/core": "^3.1",
+    "contao-community-alliance/composer-plugin": "^2.4",
+    "contao-community-alliance/events-contao-bindings": "^3.5",
+    "menatwork/contao-multicolumnwizard": "~3.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Richardhj\\Contao\\": "src/"
+    }
+  },
+  "extra": {
+    "contao": {
+      "sources": {
+        "contao": "system/modules/multicolumnwizard_frontend"
+      }
+    }
+  }
+}
