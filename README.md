@@ -6,9 +6,9 @@
 
 Install this package to be able to use the MultiColumnWizard in the frontend.
 
-[ico-version]: https://img.shields.io/packagist/v/richardhj/contao-textfield-multiple.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/richardhj/contao-multicolumnwizard-frontend.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-LGPL-brightgreen.svg?style=flat-square
-[ico-dependencies]: https://www.versioneye.com/php/richardhj:contao-textfield-multiple/badge.svg?style=flat-square
+[ico-dependencies]: https://www.versioneye.com/php/richardhj:contao-multicolumnwizard-frontend/badge.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/richardhj/contao-textfield-multiple
-[link-dependencies]: https://www.versioneye.com/php/richardhj:contao-textfield-multiple
+[link-packagist]: https://packagist.org/packages/richardhj/contao-multicolumnwizard-frontend
+[link-dependencies]: https://www.versioneye.com/php/richardhj:contao-multicolumnwizard-frontend
