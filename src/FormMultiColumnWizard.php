@@ -3,12 +3,12 @@
 /**
  * This file is part of richardhj/contao-multicolumnwizard-frontend.
  *
- * Copyright (c) 2017 Richard Henkenjohann
+ * Copyright (c) 2016-2017 Richard Henkenjohann
  *
- * @package   FormMultiColumnWizard
+ * @package   richardhj/contao-multicolumnwizard-frontend
  * @author    Richard Henkenjohann <richardhenkenjohann@googlemail.com>
- * @copyright 2017 Richard Henkenjohann
- * @license   https://github.com/MetaModels/attribute_translatedtabletext/blob/master/LICENSE LGPL-3.0
+ * @copyright 2016-2017 Richard Henkenjohann
+ * @license   https://github.com/richardhj/contao-multicolumnwizard-frontend/blob/master/LICENSE LGPL-3.0
  */
 
 namespace Richardhj\Contao;
