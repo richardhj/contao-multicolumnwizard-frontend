@@ -22,7 +22,7 @@
     "contao/core": "^3.1",
     "contao-community-alliance/composer-plugin": "^2.4",
     "contao-community-alliance/events-contao-bindings": "^3.5",
-    "menatwork/contao-multicolumnwizard": "~3.3"
+    "menatwork/contao-multicolumnwizard": "^3.3.11"
   },
   "autoload": {
     "psr-4": {

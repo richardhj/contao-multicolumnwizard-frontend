@@ -76,7 +76,7 @@ class FormMultiColumnWizard extends MultiColumnWizard
             }
 
             $return .= sprintf(
-                '<a rel="%s" href="%s" class="widgetImage" title="%s">%s</a> ',
+                '<a data-operations="%s" href="%s" class="widgetImage" title="%s">%s</a> ',
                 $button,
                 str_replace(
                     'index.php',
