@@ -1,5 +1,7 @@
 <?php
 
+use Richardhj\Contao\FormMultiColumnWizard;
+
 /**
  * This file is part of richardhj/contao-multicolumnwizard-frontend.
  *
@@ -11,4 +13,4 @@
  * @license   https://github.com/richardhj/contao-multicolumnwizard-frontend/blob/master/LICENSE LGPL-3.0
  */
 
-$GLOBALS['TL_FFL']['multiColumnWizard'] = 'Richardhj\Contao\FormMultiColumnWizard';
+$GLOBALS['TL_FFL']['multiColumnWizard'] = FormMultiColumnWizard::class;
