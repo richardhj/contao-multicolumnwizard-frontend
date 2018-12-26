@@ -5,7 +5,7 @@
   "keywords": [
     "contao"
   ],
-  "license": "LGPL-3.0+",
+  "license": "LGPL-3.0-or-later",
   "authors": [
     {
       "name": "Richard Henkenjohann",
@@ -19,9 +19,9 @@
   },
   "require": {
     "php": "^5.4 || ^7.0",
-    "contao/core-bundle": "^3.1 || ^4.4",
+    "contao/core-bundle": "^4.4",
     "contao-community-alliance/composer-plugin": "^2.4 || ^3.0",
-    "menatwork/contao-multicolumnwizard": "^3.3.17"
+    "menatwork/contao-multicolumnwizard-bundle": "^3.4"
   },
   "autoload": {
     "psr-4": {
