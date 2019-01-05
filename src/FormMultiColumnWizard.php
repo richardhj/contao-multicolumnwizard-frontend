@@ -16,7 +16,6 @@ namespace Richardhj\Contao;
 use Contao\Controller;
 use Contao\Environment;
 use Contao\Widget;
-use MultiColumnWizard;
 
 
 /**
@@ -24,7 +23,7 @@ use MultiColumnWizard;
  *
  * @package Richardhj\Contao
  */
-class FormMultiColumnWizard extends MultiColumnWizard
+class FormMultiColumnWizard extends \MenAtWork\MultiColumnWizardBundle\Contao\Widgets\MultiColumnWizard
 {
 
     /**
@@ -54,6 +53,63 @@ class FormMultiColumnWizard extends MultiColumnWizard
         Widget::__construct($arrAttributes);
     }
 
+    public function generate($overwriteRowCurrentRow = null, $onlyRows = false)
+    {
+        $return = parent::generate($overwriteRowCurrentRow, $onlyRows);
+
+        unset($GLOBALS['TL_JAVASCRIPT']['mcw'], $GLOBALS['TL_CSS']['mcw']);
+
+        $GLOBALS['TL_JQUERY'][] = <<<'HTML'
+<script>
+    $(function () {
+        $(document).on('click', 'table.multicolumnwizard a[data-operations="new"]', function (event) {
+            event.preventDefault();
+
+            var clonedRow = $(this).closest('tr').clone();
+            clonedRow.find('input').val('');
+            $(this).closest('tr').after(clonedRow);
+        });
+
+        $(document).on('click', 'table.multicolumnwizard a[data-operations="up"]', function (event) {
+            event.preventDefault();
+            var row = $(this).parents('tr:first');
+            row.insertBefore(row.prev());
+        });
+
+        $(document).on('click', 'table.multicolumnwizard a[data-operations="down"]', function (event) {
+            event.preventDefault();
+            var row = $(this).parents('tr:first');
+            row.insertAfter(row.prev());
+        });
+
+        $(document).on('click', 'table.multicolumnwizard a[data-operations="delete"]', function (event) {
+            event.preventDefault();
+            $(this).closest('tr').remove();
+        });
+    }(jQuery));
+</script>
+HTML;
+
+        return $return;
+    }
+
+    protected function generateTable(
+        $arrUnique,
+        $arrDatepicker,
+        $arrColorpicker,
+        $strHidden,
+        $arrItems,
+        $arrHiddenHeader = array(),
+        $onlyRows = false
+    )
+    {
+        $return = parent::generateTable($arrUnique, $arrDatepicker, $arrColorpicker, $strHidden, $arrItems, $arrHiddenHeader, $onlyRows);
+
+        // fixme does not work
+        $return = preg_replace('/<script(.*?)>(.*?)<\/script>/im', '', $return);
+
+        return $return;
+    }
 
     /**
      * Generate button string
@@ -82,8 +138,8 @@ class FormMultiColumnWizard extends MultiColumnWizard
                         http_build_query(
                             [
                                 $this->strCommand => $button,
-                                'cid'             => $level,
-                                'id'              => $this->currentRecord,
+                                'cid' => $level,
+                                'id' => $this->currentRecord,
                             ]
                         ),
                         false
@@ -110,17 +166,4 @@ class FormMultiColumnWizard extends MultiColumnWizard
         return '<span class="button ' . $button . '"></span>';
     }
 
-    /**
-     * Disable the date picker because it is not designed for front end
-     *
-     * @param string $strId
-     * @param string $strKey
-     * @param string $rgxp
-     *
-     * @return string
-     */
-    protected function getMcWDatePickerString($strId, $strKey, $rgxp)
-    {
-        return '';
-    }
 }
