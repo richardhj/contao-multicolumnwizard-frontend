@@ -51,6 +51,8 @@ class FormMultiColumnWizard extends \MenAtWork\MultiColumnWizardBundle\Contao\Wi
     {
         /** @noinspection PhpDynamicAsStaticMethodCallInspection */
         Widget::__construct($arrAttributes);
+
+        $this->eventDispatcher = \System::getContainer()->get('event_dispatcher');
     }
 
     public function generate($overwriteRowCurrentRow = null, $onlyRows = false)
@@ -196,6 +198,20 @@ HTML;
     protected function getButtonContent($button)
     {
         return '<span class="button ' . $button . '"></span>';
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getMcWDatePickerString(
+        $fieldId,
+        $fieldName,
+        $rgxp = null,
+        $fieldConfiguration = null,
+        $tableName = null
+    ) {
+        return '';
     }
 
 }
