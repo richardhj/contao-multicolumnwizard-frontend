@@ -139,8 +139,7 @@ HTML;
             $onlyRows
         );
 
-        // fixme does not work
-        $return = preg_replace('/<script(.*?)>(.*?)<\/script>/im', '', $return);
+        $return = preg_replace('/<script(.*?)>([\s\S]*?)<\/script>/im', '', $return);
 
         return $return;
     }
