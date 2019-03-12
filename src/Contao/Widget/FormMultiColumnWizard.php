@@ -47,7 +47,7 @@ class FormMultiColumnWizard extends \MenAtWork\MultiColumnWizardBundle\Contao\Wi
 
         unset($GLOBALS['TL_JAVASCRIPT']['mcw'], $GLOBALS['TL_CSS']['mcw']);
 
-        $GLOBALS['TL_JQUERY']['mcw_fe'] =
+        $GLOBALS['TL_JAVASCRIPT']['mcw_fe'] =
             'bundles/richardhjcontaomulticolumnwizardfrontend/jquery.multicolumnwizard_fe.js';
 
         return $return;
