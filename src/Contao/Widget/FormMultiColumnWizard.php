@@ -11,7 +11,7 @@
  * @license   https://github.com/richardhj/contao-multicolumnwizard-frontend/blob/master/LICENSE LGPL-3.0
  */
 
-namespace Richardhj\Contao;
+namespace Richardhj\ContaoMultiColumnWizardFrontendBundle\Contao\Widget;
 
 use Contao\Controller;
 use Contao\Environment;
@@ -53,42 +53,13 @@ class FormMultiColumnWizard extends \MenAtWork\MultiColumnWizardBundle\Contao\Wi
         Widget::__construct($arrAttributes);
     }
 
-    public function generate($overwriteRowCurrentRow = null, $onlyRows = false)
+    public function generate($overwriteRowCurrentRow = null, $onlyRows = false): string
     {
         $return = parent::generate($overwriteRowCurrentRow, $onlyRows);
 
         unset($GLOBALS['TL_JAVASCRIPT']['mcw'], $GLOBALS['TL_CSS']['mcw']);
 
-        $GLOBALS['TL_JQUERY'][] = <<<'HTML'
-<script>
-    $(function () {
-        $(document).on('click', 'table.multicolumnwizard a[data-operations="new"]', function (event) {
-            event.preventDefault();
-
-            var clonedRow = $(this).closest('tr').clone();
-            clonedRow.find('input').val('');
-            $(this).closest('tr').after(clonedRow);
-        });
-
-        $(document).on('click', 'table.multicolumnwizard a[data-operations="up"]', function (event) {
-            event.preventDefault();
-            var row = $(this).parents('tr:first');
-            row.insertBefore(row.prev());
-        });
-
-        $(document).on('click', 'table.multicolumnwizard a[data-operations="down"]', function (event) {
-            event.preventDefault();
-            var row = $(this).parents('tr:first');
-            row.insertAfter(row.prev());
-        });
-
-        $(document).on('click', 'table.multicolumnwizard a[data-operations="delete"]', function (event) {
-            event.preventDefault();
-            $(this).closest('tr').remove();
-        });
-    }(jQuery));
-</script>
-HTML;
+        $GLOBALS['TL_JQUERY']['mcw_fe'] = 'bundles/richardhjcontaomulticolumnwizardfrontend/jquery.multicolumnwizard_fe.js';
 
         return $return;
     }
