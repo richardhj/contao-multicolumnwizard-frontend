@@ -22,12 +22,15 @@
     "contao/core-bundle": "^4.4",
     "menatwork/contao-multicolumnwizard-bundle": "^3.4"
   },
+  "require-dev": {
+    "contao/manager-plugin": "^2.7"
+  },
   "autoload": {
     "psr-4": {
       "Richardhj\\ContaoMultiColumnWizardFrontendBundle\\": "src/"
     }
   },
   "extra": {
-    "contao-manager-plugin": "Richardhj\\ContaoMultiColumnWizardFrontendBundle\\ContaoManager\\Plugin",
+    "contao-manager-plugin": "Richardhj\\ContaoMultiColumnWizardFrontendBundle\\ContaoManager\\Plugin"
   }
 }

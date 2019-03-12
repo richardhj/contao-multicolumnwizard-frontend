@@ -13,9 +13,7 @@
 
 namespace Richardhj\ContaoMultiColumnWizardFrontendBundle\Contao\Widget;
 
-use Contao\Controller;
-use Contao\Environment;
-use Contao\Widget;
+use Contao\{StringUtil, System, Widget};
 
 
 /**
@@ -26,21 +24,9 @@ use Contao\Widget;
 class FormMultiColumnWizard extends \MenAtWork\MultiColumnWizardBundle\Contao\Widgets\MultiColumnWizard
 {
 
-    /**
-     * Template
-     *
-     * @var string
-     */
     protected $strTemplate = 'form_mcw';
 
-
-    /**
-     * The CSS class prefix
-     *
-     * @var string
-     */
     protected $strPrefix = 'widget widget-mcw';
-
 
     /** @noinspection PhpMissingParentConstructorInspection
      * Don't use parent's but parent parent's __construct
@@ -51,6 +37,8 @@ class FormMultiColumnWizard extends \MenAtWork\MultiColumnWizardBundle\Contao\Wi
     {
         /** @noinspection PhpDynamicAsStaticMethodCallInspection */
         Widget::__construct($arrAttributes);
+
+        $this->eventDispatcher = System::getContainer()->get('event_dispatcher');
     }
 
     public function generate($overwriteRowCurrentRow = null, $onlyRows = false): string
@@ -59,7 +47,8 @@ class FormMultiColumnWizard extends \MenAtWork\MultiColumnWizardBundle\Contao\Wi
 
         unset($GLOBALS['TL_JAVASCRIPT']['mcw'], $GLOBALS['TL_CSS']['mcw']);
 
-        $GLOBALS['TL_JQUERY']['mcw_fe'] = 'bundles/richardhjcontaomulticolumnwizardfrontend/jquery.multicolumnwizard_fe.js';
+        $GLOBALS['TL_JQUERY']['mcw_fe'] =
+            'bundles/richardhjcontaomulticolumnwizardfrontend/jquery.multicolumnwizard_fe.js';
 
         return $return;
     }
@@ -72,24 +61,23 @@ class FormMultiColumnWizard extends \MenAtWork\MultiColumnWizardBundle\Contao\Wi
         $arrItems,
         $arrHiddenHeader = array(),
         $onlyRows = false
-    )
-    {
-        $return = parent::generateTable($arrUnique, $arrDatepicker, $arrColorpicker, $strHidden, $arrItems, $arrHiddenHeader, $onlyRows);
+    ): string {
+        $return = parent::generateTable(
+            $arrUnique,
+            $arrDatepicker,
+            $arrColorpicker,
+            $strHidden,
+            $arrItems,
+            $arrHiddenHeader,
+            $onlyRows
+        );
 
-        // fixme does not work
-        $return = preg_replace('/<script(.*?)>(.*?)<\/script>/im', '', $return);
+        $return = preg_replace('/<script(.*?)>([\s\S]*?)<\/script>/im', '', $return);
 
         return $return;
     }
 
-    /**
-     * Generate button string
-     *
-     * @param int $level
-     *
-     * @return string
-     */
-    protected function generateButtonString($level = 0)
+    protected function generateButtonString($level = 0): string
     {
         $return = '';
 
@@ -100,23 +88,9 @@ class FormMultiColumnWizard extends \MenAtWork\MultiColumnWizardBundle\Contao\Wi
             }
 
             $return .= sprintf(
-                '<a data-operations="%s" href="%s" class="widgetImage" title="%s">%s</a> ',
+                '<a data-operations="%s" href="#" class="widgetImage" title="%s">%s</a> ',
                 $button,
-                str_replace(
-                    'index.php',
-                    strtok(Environment::get('requestUri'), '?'),
-                    Controller::addToUrl(
-                        http_build_query(
-                            [
-                                $this->strCommand => $button,
-                                'cid' => $level,
-                                'id' => $this->currentRecord,
-                            ]
-                        ),
-                        false
-                    )
-                ),
-                $GLOBALS['TL_LANG']['MSC']['tw_r' . specialchars($button)],
+                $GLOBALS['TL_LANG']['MSC']['tw_r' . StringUtil::specialchars($button)],
                 $this->getButtonContent($button) # We don't want to output an image and don't provide $image
             );
         }
@@ -124,17 +98,18 @@ class FormMultiColumnWizard extends \MenAtWork\MultiColumnWizardBundle\Contao\Wi
         return $return;
     }
 
-
-    /**
-     * Get the content of the button, either text or image
-     *
-     * @param string $button The button name
-     *
-     * @return string
-     */
-    protected function getButtonContent($button)
+    protected function getButtonContent($button): string
     {
         return '<span class="button ' . $button . '"></span>';
     }
 
+    protected function getMcWDatePickerString(
+        $fieldId,
+        $fieldName,
+        $rgxp = null,
+        $fieldConfiguration = null,
+        $tableName = null
+    ): string {
+        return '';
+    }
 }
